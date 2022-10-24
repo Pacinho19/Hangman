@@ -28,7 +28,7 @@
 <body>
 <div class="row">
     <div class="col-md-2">
-        <h1 th:text="${word}"></h1>
+        <h1 th:if="${word!=null}" th:text="${word}"></h1>
 
         <div class="row" style="margin-left:1%">
             <th:block th:if="${hangman.lifeCount>0}" th:each="i: ${#numbers.sequence(1, hangman.lifeCount)}">

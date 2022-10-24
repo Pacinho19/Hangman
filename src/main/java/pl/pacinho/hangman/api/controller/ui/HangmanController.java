@@ -21,7 +21,7 @@ public class HangmanController {
     public String home(Model model,
                        HttpSession session) {
         model.addAttribute("hangman", sessionService.getHangman(session));
-        model.addAttribute("word", sessionService.getWord(session));
+//        model.addAttribute("word", sessionService.getWord(session));
 
         return "hangman-home";
     }
