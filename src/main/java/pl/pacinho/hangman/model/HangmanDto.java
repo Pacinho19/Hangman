@@ -20,8 +20,10 @@ public class HangmanDto {
     private boolean win;
     @Setter
     private String word;
+    private List<String> definition;
 
-    public HangmanDto(String word) {
+    public HangmanDto(String word, List<String> definition) {
+        this.definition = definition;
         checkedLetters = new ArrayList<>();
         wordLetters = WordUtils.emptyWordList(word.length());
         win = false;

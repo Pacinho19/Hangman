@@ -22,6 +22,7 @@
           margin-left: auto;
           margin-right: auto;
         }
+
     </style>
 </head>
 <body>
@@ -30,11 +31,11 @@
         <h1 th:text="${word}"></h1>
 
         <div class="row" style="margin-left:1%">
-            <th:block th:if="${hangman.lifeCount>0}" th:each="i: ${#numbers.sequence(1, hangman.lifeCount)}" >
+            <th:block th:if="${hangman.lifeCount>0}" th:each="i: ${#numbers.sequence(1, hangman.lifeCount)}">
                 <h2 style="margin-left:1%"><i class="bi bi-suit-heart-fill" style="color:red"></i></h2>
             </th:block>
             <th:block th:if="${hangman.MAX_LIFE - hangman.lifeCount>0}"
-                      th:each="i: ${#numbers.sequence(1, hangman.MAX_LIFE - hangman.lifeCount)}" >
+                      th:each="i: ${#numbers.sequence(1, hangman.MAX_LIFE - hangman.lifeCount)}">
                 <h2 style="margin-left:1%"><i class="bi bi-suit-heart-fill" style="color:grey"></i></h2>
             </th:block>
         </div>
@@ -51,7 +52,8 @@
             </div>
 
             <div th:if="${!hangman.win}" class="alert alert-danger alert-dismissible">
-                <h4 class="error" th:text="${'You lose! Correct words : '+ hangman.word +'. Try again with new game!'}"></h4>
+                <h4 class="error"
+                    th:text="${'You lose! Correct words : '+ hangman.word +'. Try again with new game!'}"></h4>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -83,9 +85,19 @@
 
         <form th:action="@{/hangman/check}" th:method="post" style="margin-top:1%"
               th:if="${hangman!=null && !hangman.endGame}">
-            <input oninput="this.value = this.value.toUpperCase()" type="text" name="letter" maxlength="1" minlength="1" placeholder="Letter" autofocus="autofocus">
+            <input oninput="this.value = this.value.toUpperCase()" type="text" name="letter" maxlength="1" minlength="1"
+                   placeholder="Letter" autofocus="autofocus">
             <button type="submit" class="btn btn-primary">Check</button>
         </form>
+
+        <hr class="rounded">
+
+        <th:block th:if="${hangman.definition.size>0}">
+            <h2>Hints</h2>
+            <div class="row" th:each="def : ${hangman.definition}">
+                <span th:text="${def}" style="width:100%;border: none;outline: none;overflow:hidden"/>
+            </div>
+        </th:block>
 
         <hr class="rounded">
 

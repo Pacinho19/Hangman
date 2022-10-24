@@ -3,6 +3,7 @@ package pl.pacinho.hangman.utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.pacinho.hangman.model.HangmanDto;
+import pl.pacinho.hangman.service.WordDefinitionService;
 import pl.pacinho.hangman.service.WordService;
 
 import javax.servlet.http.HttpSession;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 @Service
 public class HangmanSessionService {
 
+    private final WordDefinitionService wordDefinitionService;
     private final WordService wordService;
     private static final String WORD_PARAM_NAME = "word";
     private static final String HANGMAN_PARAM_NAME = "hangman";
@@ -83,7 +85,7 @@ public class HangmanSessionService {
     }
 
     private HangmanDto initHangman(HttpSession session, String word) {
-        HangmanDto hangmanDto = new HangmanDto(word);
+        HangmanDto hangmanDto = new HangmanDto(word, wordDefinitionService.getDefinition(word));
         session.setAttribute(HANGMAN_PARAM_NAME, hangmanDto);
         return hangmanDto;
     }
