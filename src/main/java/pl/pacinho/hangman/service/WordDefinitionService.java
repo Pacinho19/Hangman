@@ -54,13 +54,10 @@ public class WordDefinitionService {
     }
 
     private String readInputStream(InputStream inputStream) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-        StringBuffer sb = new StringBuffer();
-        String inputLine;
-        while ((inputLine = in.readLine()) != null) {
-            sb.append(inputLine);
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")))) {
+            return in.lines()
+                    .collect(Collectors.joining());
         }
-        return sb.toString();
     }
 
     private HttpURLConnection getHttpUrlConnection(URL url) throws Exception {
