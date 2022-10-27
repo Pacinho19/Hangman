@@ -91,7 +91,8 @@ public class HangmanSessionService {
     }
 
     public void newGame(HttpSession session) {
-        session.removeAttribute(WORD_PARAM_NAME);
-        session.removeAttribute(HANGMAN_PARAM_NAME);
+        session.invalidate();
+//        session.removeAttribute(WORD_PARAM_NAME);
+//        session.removeAttribute(HANGMAN_PARAM_NAME);
     }
 }
